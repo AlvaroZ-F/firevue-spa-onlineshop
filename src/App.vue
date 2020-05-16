@@ -1,32 +1,92 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<div class="d-flex flex-column sticky-footer-wrapper">
+		<main class="flex-fill">
+			<app-header></app-header>
+			<message-component></message-component>
+			<div class="container mt-3">
+				<div class="row">
+					<div class="row">
+						<div class="col-md-12">
+							<router-view></router-view>
+							<div class="card panel-warning d-none d-sm-flex" id="reset-store-panel">
+								<div class="card-header">Admin Panel</div>
+								<div class="card-body text-center">
+									<button class="btn btn-warning">Reset Store</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="navbar-default navbar-bottom navbar-dark bg-dark">
+			<div class="container-fluid">
+				<p class="text-center nav-bar mb-0">Made by Alvaro Zambrana Fernandez. Repository at <a href="#" target="_blank">Github/AlvaroZ-F/FireVue-SPA-OnlineShop</a></p>
+			</div>
+		</footer>
+	</div>
 </template>
 
+<script>
+
+	import { mapActions } from 'vuex';
+	import Header from './components/Header.vue';
+	import MessageComponent from './components/other/MessageComponent.vue';
+
+	export default {
+		components: {
+			appHeader: Header,
+			MessageComponent
+		},
+
+		methods: {
+			...mapActions(['getShoppingCart', 'listenToProductList'])
+		},
+
+		created() {
+			let uid = this.$store.getters.currentUser.uid;
+			this.listenToProductList();
+			this.getShoppingCart({ uid, currentCart: this.$store.getters.cartItemList });
+		}
+	}
+
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-}
+	#reset-store-panel {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+	}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+	body, .sticky-footer-wrapper {
+		min-height: 100vh;
+	}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+	.flex-fill {
+		flex: 1 1 auto;
+	}
+
+	footer {
+		height: 40px;
+		color: #666;
+		padding: 10px 0 10px 0;
+		font-size: 85%;
+	}
+
+	footer a {
+		color: #999;
+	}
+
+	footer a:hover {
+		color: #efefef;
+	}
+
+	@media (max-width: 576px) {
+		footer {
+			height: 50px;
+		}
+	}
 </style>
