@@ -13,9 +13,9 @@
 				<p class="card-text truncate"> {{ item.description | shortDescription }}</p>
 
 				<div class="row">
-					<p class="col-6 lead">{{ item.price }} €</p>
+					<p class="col-6 lead">{{ item.price }} &euro;</p>
 					<p class="col-6">
-						<button class="btn btn-success pull-right" :disable="item.quantity === 0" @click="addItem">
+						<button class="btn btn-success pull-right" :disable="item.quantity === 0" @click="addItems">
 							Add to cart
 						</button>
 					</p>

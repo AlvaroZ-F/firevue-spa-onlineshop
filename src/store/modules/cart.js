@@ -1,50 +1,49 @@
 const state = {
-	cartItemList: []
+	messageGroup: {
+		messageClass: '',
+		message: '',
+		timeoutEvent: null,
+	}
 }
 
 const mutations = {
-	'UPDATE_CART'(state, { item, quantity, isAdd }) {
-		const record = state.cartItemList.find(element => element.id == item.id);
-		if (record) {
-			if (isAdd) {
-				record.quantity += quantity;
-			} else {
-				record.quantity = quantity;
+	'ADD_MESSAGE'(state, { message, messageClass }) {
+		state.messageGroup = {
+			messageClass,
+			message
+		}
+
+		if (state.timeoutEvent) {
+			clearTimeout(state.timeoutEvent);
+		}
+		state.timeoutEvent = setTimeout(function () {
+			state.messageGroup = {
+				messageClass: '',
+				message: ''
 			}
-		} else {
-			state.cartItemList.push({
-				...item,
-				quantity
-			});
-		}
+		}, 5000);
 	},
-	'SET_CART'(state, productList) {
-		if (productList) {
-			state.cartItemList = productList;
+	'CLEAR_MESSAGE'(state) {
+		state.messageGroup = {
+			messageClass: '',
+			message: ''
 		}
-	},
-	'REMOVE_CART_ITEM'(state, { item }) {
-		const record = state.cartItemList.find(element => element.id == item.id);
-		state.cartItemList.splice(state.cartItemList.indexOf(record), 1);
 	}
 }
 
 const actions = {
-	clearCart: ({ commit }) => {
-		commit('SET_CART', []);
+	// Don't need action for now
+	addMessage({ commit }, obj) {
+		commit('ADD_MESSAGE', obj);
+	},
+	clearMessage({ commit }) {
+		commit('CLEAR_MESSAGE');
 	}
 }
 
 const getters = {
-	cartItemList: (state) => {
-		return state.cartItemList;
-	},
-	cartValue: (state) => {
-		let res = 0;
-		state.cartItemList.map(item => {
-			res += item.price * item.quantity;
-		});
-		return res;
+	messages: (state) => {
+		return state.messageGroup;
 	}
 }
 

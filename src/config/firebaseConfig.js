@@ -11,19 +11,22 @@ const config = {
 	measurementId: "G-JP0WWE8TF2"
 }
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
+firebase.analytics();
 
 export function firebaseListener(func) {
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
+			console.log("User log in successfully", user)
 			func(true, user)
 		} else {
+			console.log("User log in failed", user);
 			func(false)
 		}
 	}, function (error) {
-		console.log(error)
-	});
+			console.log(error)
+	})
 }
 
-export const ref = firebase.database().ref();
-export const firebaseAuth = firebase.auth;
+export const ref = firebase.database().ref()
+export const firebaseAuth = firebase.auth

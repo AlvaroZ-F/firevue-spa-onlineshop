@@ -23,7 +23,7 @@ export const registerByEmail = (_, { email, password }) => {
 }
 
 export const logout = ({ commit }) => {
-	commit('SET_CART', []);
+	commit('SET_CART', []); // clear current cart
 	return firebaseAuth().signOut();
 }
 

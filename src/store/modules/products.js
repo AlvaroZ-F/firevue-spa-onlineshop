@@ -10,9 +10,7 @@ const mutations = {
 	}
 }
 
-const actions = {
-
-}
+const actions = {}
 
 const getters = {
 	products: (state) => {
@@ -22,6 +20,7 @@ const getters = {
 		return state.isLoading;
 	}
 }
+
 
 export default {
 	state,

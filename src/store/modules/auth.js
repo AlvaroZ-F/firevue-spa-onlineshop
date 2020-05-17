@@ -1,10 +1,5 @@
 import { firebaseAuth } from '../../config/firebaseConfig';
 
-const state = {
-	isLoggedIn: firebaseAuth().currentUser != null,
-	user: firebaseAuth().currentUser,
-}
-
 const mutations = {
 	'AUTH_STATUS_CHANGE'(state) {
 		state.isLoggedIn = firebaseAuth().currentUser != null;
@@ -13,6 +8,11 @@ const mutations = {
 }
 
 const actions = {}
+
+const state = {
+	isLoggedIn: firebaseAuth().currentUser != null,
+	user: firebaseAuth().currentUser,
+}
 
 const getters = {
 	isLoggedIn: (state) => {
@@ -30,6 +30,7 @@ const getters = {
 		}
 	}
 }
+
 
 export default {
 	state,

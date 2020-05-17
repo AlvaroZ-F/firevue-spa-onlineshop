@@ -32,7 +32,7 @@
 
 					<li>
 						<router-link to="/cart" class="btn btn-success navbar-btn" tag="button">
-							Checkout <span class="badge badge-light">{{ numItems }} (€ {{ cartValue }})</span>
+							Checkout <span class="badge badge-light">{{ numItems }} ({{ cartValue }} &euro;)</span>
 						</router-link>
 					</li>
 				</ul>
