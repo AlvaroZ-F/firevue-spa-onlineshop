@@ -8,12 +8,6 @@
 					<div class="row">
 						<div class="col-md-12">
 							<router-view></router-view>
-							<div class="card panel-warning d-none d-sm-flex" id="reset-store-panel">
-								<div class="card-header">Admin Panel</div>
-								<div class="card-body text-center">
-									<button class="btn btn-warning">Reset Store</button>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -54,13 +48,6 @@
 </script>
 
 <style>
-
-	#reset-store-panel {
-		position: fixed;
-		bottom: 0px;
-		right: 0px;
-	}
-
 	body, .sticky-footer-wrapper {
 		min-height: 100vh;
 	}
